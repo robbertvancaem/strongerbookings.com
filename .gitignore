@@ -1,0 +1,6 @@
+wp-config.php
+.env
+wp-admin
+wp-content/*
+!wp-content/themes
+wp-includes
