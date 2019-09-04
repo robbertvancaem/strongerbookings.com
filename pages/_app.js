@@ -19,7 +19,7 @@ export default class MyApp extends App {
       this.setState({
         loading: false,
       });
-    }, 200);
+    }, 500);
 
     Router.events.on('routeChangeStart', () => {
       this.setState({
@@ -28,14 +28,11 @@ export default class MyApp extends App {
     });
 
     Router.events.on('routeChangeComplete', () => {
-      this.setState({
-        loading: false,
-      });
-    });
-    Router.events.on('routeChangeError', () => {
-      this.setState({
-        loading: false,
-      });
+      setTimeout(() => {
+        this.setState({
+          loading: false,
+        });
+      }, 500);
     });
   }
 
@@ -52,9 +49,7 @@ export default class MyApp extends App {
   }
 
   render() {
-    const {
-      Component, pageProps, router, slides,
-    } = this.props;
+    const { Component, pageProps, router } = this.props;
 
     return (
       <Container>
@@ -70,7 +65,7 @@ export default class MyApp extends App {
             <GlobalStyle />
             <Loader show={this.state.loading} />
             <Navigation />
-            <Component {...pageProps} key={router.route} slides={slides} />
+            <Component {...pageProps} key={router.route} />
           </div>
         </ThemeProvider>
       </Container>

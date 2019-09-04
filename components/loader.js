@@ -11,8 +11,8 @@ const Container = styled.div`
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  transition: all 0.5s ease;
-  z-index: 999;
+  transition: all 0.25s ease;
+  z-index: 2;
 
   ${({ show }) => !show
     && `

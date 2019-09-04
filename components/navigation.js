@@ -15,6 +15,8 @@ const Wrapper = styled.nav`
   align-items: center;
   justify-content: space-between;
   padding: 0 2em;
+  position: relative;
+  z-index: 3;
 `;
 
 const Logo = styled(Box)`

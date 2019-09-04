@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
-import getRoster from '../data/roster';
+import wpRestApiUrl from '../config/endpoints';
 
 const Main = styled.main`
   display: flex;
@@ -24,22 +25,24 @@ const Item = styled.div`
 
 const Name = styled.h1``;
 
-const Roster = ({ roster }) => console.log(roster) || (
-<Main>
-  {roster.map((r) => {
-    console.log(r._embedded);
-    const image = r._embedded['wp:featuredmedia'] && r._embedded['wp:featuredmedia'][0].source_url;
-    return (
-      <Item key={r.id} image={image}>
-        <Name>{r.title.rendered}</Name>
-      </Item>
-    );
-  })}
-</Main>
+const Roster = ({ roster }) => (
+  <Main>
+    {roster.map((r) => {
+      const image = r._embedded['wp:featuredmedia'] && r._embedded['wp:featuredmedia'][0].source_url;
+      return (
+        <Item key={r.id} image={image}>
+          <Name>{r.title.rendered}</Name>
+        </Item>
+      );
+    })}
+  </Main>
 );
 
 Roster.getInitialProps = async () => {
-  const roster = await getRoster();
+  const path = `${wpRestApiUrl}posts?categories=12&orderby=title&order=asc&_embed&per_page=100`;
+
+  const r = await axios.get(path);
+  const roster = await r.data;
 
   return { roster };
 };
