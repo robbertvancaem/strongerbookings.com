@@ -11,7 +11,11 @@ const page = async (slug) => {
 
   const path = `${wpRestApiUrl}pages?slug=${wpSlug}`;
 
-  const r = await axios.get(path);
+  const r = await axios.get(path, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  });
   const data = await r.data[0];
 
   return data;

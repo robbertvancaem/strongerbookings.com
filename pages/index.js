@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+
+import wpRestApiUrl from '../config/endpoints';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -18,18 +21,33 @@ const Slide = styled.div`
   opacity: ${({ active }) => (active ? 1 : 0)};
 `;
 
-const Index = ({ slides }) => {
-  const [active, setActive] = useState(0);
-  setTimeout(() => {
-    setActive((active + 1) % slides.length);
-  }, 5000);
-  return (
-    <Wrapper>
-      {slides.map((slide, index) => (
-        <Slide key={slide} active={index === active} path={slide} />
-      ))}
-    </Wrapper>
-  );
-};
+export default class Index extends Component {
+  static async getInitialProps() {
+    const path = `${wpRestApiUrl}pages?slug=homepage`;
 
-export default Index;
+    const r = await axios.get(path);
+    const data = await r.data[0];
+
+    return {
+      slides: [data.acf.slide_1, data.acf.slide_2, data.acf.slide_3],
+    };
+  }
+
+  render({ slides }) {
+    const [active, setActive] = useState(0);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setActive(a => (a + 1) % slides.length);
+      }, 5000);
+      return () => clearInterval(interval);
+    }, []);
+
+    return (
+      <Wrapper>
+        {slides.map((slide, index) => (
+          <Slide key={slide} active={index === active} path={slide} />
+        ))}
+      </Wrapper>
+    );
+  }
+}

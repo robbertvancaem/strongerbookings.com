@@ -9,7 +9,6 @@ import Image from './image';
 const Wrapper = styled.nav`
   height: 80px;
   width: 100%;
-  position: fixed;
   top: 0;
   z-index: 666;
   display: flex;
@@ -27,6 +26,11 @@ const MenuItems = styled(Flex)`
 
   a {
     margin-left: 4em;
+    transition: all 0.25s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
   }
 `;
 

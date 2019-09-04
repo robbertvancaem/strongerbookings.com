@@ -8,6 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Montserrat', sans-serif;
   background: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.white};
 }
 
 a {

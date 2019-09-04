@@ -9,8 +9,6 @@ import GlobalStyle from '../components/global-style';
 import Navigation from '../components/navigation';
 import theme from '../theme';
 
-import getPageData from '../data/page';
-
 export default class MyApp extends App {
   state = {
     loading: true,
@@ -44,17 +42,12 @@ export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
-    const currentSlug = ctx.pathname || 'index';
-
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    const pageData = await getPageData(currentSlug);
-
     return {
       pageProps,
-      slides: [pageData.acf.slide_1, pageData.acf.slide_2, pageData.acf.slide_3],
     };
   }
 
@@ -68,7 +61,7 @@ export default class MyApp extends App {
         <ThemeProvider theme={theme}>
           <div>
             <Head>
-              <title>strongerbookings.com</title>
+              <title>Stronger Bookings | strongerbookings.com</title>
               <link
                 href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap"
                 rel="stylesheet"
