@@ -25,6 +25,14 @@ img {
   box-sizing: border-box;
   font-weight: normal;
 }
+
+strong {
+  font-weight: 700;
+}
+
+p {
+  line-height: 2em;
+}
 `;
 
 export default GlobalStyle;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { Box, Flex } from '@rebass/grid';
 
+import media from '../utils/media-queries';
 import LogoSrc from '../static/images/logo.png';
 import Image from './image';
 
@@ -15,12 +16,21 @@ const Wrapper = styled.nav`
   align-items: center;
   justify-content: space-between;
   padding: 0 2em;
-  position: relative;
+  position: fixed;
   z-index: 3;
+  background: transparent;
+
+  ${media.phone`
+    padding: 0 1em;
+  `}
 `;
 
 const Logo = styled(Box)`
   width: 6em;
+
+  ${media.phone`
+    width: 4em;
+  `}
 `;
 
 const MenuItems = styled(Flex)`
@@ -30,8 +40,13 @@ const MenuItems = styled(Flex)`
     margin-left: 4em;
     transition: all 0.25s ease;
 
+    ${media.phone`
+      margin-left: 2em;
+      font-size: 0.75em;
+    `}
+
     &:hover {
-      transform: translateY(-3px);
+      transform: translateX(3px);
     }
   }
 `;
