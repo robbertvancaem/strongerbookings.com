@@ -33,6 +33,10 @@ strong {
 p {
   line-height: 2em;
 }
+
+h1 {
+  font-size: 1.6em;
+}
 `;
 
 export default GlobalStyle;

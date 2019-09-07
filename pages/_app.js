@@ -61,6 +61,10 @@ export default class MyApp extends App {
                 href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap"
                 rel="stylesheet"
               />
+              <link
+                rel="stylesheet"
+                href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css"
+              />
             </Head>
             <GlobalStyle />
             <Loader show={this.state.loading} />

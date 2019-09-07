@@ -3,11 +3,22 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 import wpRestApiUrl from '../config/endpoints';
+import Icon from '../components/icon';
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
+`;
+
+const Socials = styled.div`
+  bottom: 2em;
+  right: 2em;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
 `;
 
 const Slide = styled.div`
@@ -32,6 +43,22 @@ const Index = ({ slides }) => {
 
   return (
     <Wrapper>
+      <Socials>
+        <a
+          href="https://www.facebook.com/STRONGERBOOKINGS/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="facebook-official" />
+        </a>
+        <a
+          href="https://www.instagram.com/strongerbookings/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="instagram" />
+        </a>
+      </Socials>
       {slides.map((slide, index) => (
         <Slide key={slide} active={index === active} path={slide} />
       ))}
