@@ -22,7 +22,7 @@ const Tours = ({ tours }) => console.log(tours) || (
     {tours.map((t) => {
       const image = t._embedded['wp:featuredmedia'] && t._embedded['wp:featuredmedia'][0].source_url;
       return (
-        <Tour width={[0.5, 0.5, 1 / 4]} p={[1, 1, 2]} key={t.id}>
+        <Tour width={[0.5, 0.5, 1 / 4]} m={2} p={[1, 1, 2]} key={t.id}>
           <Image src={image} />
           <h4 dangerouslySetInnerHTML={{ __html: t.title.rendered }} />
         </Tour>
@@ -33,7 +33,7 @@ const Tours = ({ tours }) => console.log(tours) || (
 );
 
 Tours.getInitialProps = async () => {
-  const path = `${wpRestApiUrl}posts?categories=2&orderby=title&order=asc&_embed`;
+  const path = `${wpRestApiUrl}posts?categories=2&orderby=modified&order=desc&_embed`;
 
   const r = await axios.get(path);
   const tours = await r.data;
