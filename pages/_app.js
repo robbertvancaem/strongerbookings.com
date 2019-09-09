@@ -2,40 +2,12 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
-import Router from 'next/router';
 
-import Loader from '../components/loader';
 import GlobalStyle from '../components/global-style';
 import Navigation from '../components/navigation';
 import theme from '../theme';
 
 export default class MyApp extends App {
-  state = {
-    loading: true,
-  };
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        loading: false,
-      });
-    }, 500);
-
-    Router.events.on('routeChangeStart', () => {
-      this.setState({
-        loading: true,
-      });
-    });
-
-    Router.events.on('routeChangeComplete', () => {
-      setTimeout(() => {
-        this.setState({
-          loading: false,
-        });
-      }, 500);
-    });
-  }
-
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
@@ -67,7 +39,6 @@ export default class MyApp extends App {
               />
             </Head>
             <GlobalStyle />
-            <Loader show={this.state.loading} />
             <Navigation />
             <Component {...pageProps} key={router.route} />
           </div>
