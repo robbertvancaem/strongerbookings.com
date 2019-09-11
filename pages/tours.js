@@ -18,7 +18,7 @@ const Tour = styled(Box)`
 
 const Tours = ({ tours }) => console.log(tours) || (
 <Main>
-  <Flex width={1} justifyContent="center">
+  <Flex width={1} justifyContent="center" flexWrap="wrap">
     {tours.map((t) => {
       const image = t._embedded['wp:featuredmedia'] && t._embedded['wp:featuredmedia'][0].source_url;
       return (
