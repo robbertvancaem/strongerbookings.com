@@ -25,8 +25,8 @@ const Contact = () => (
     <p>
       <strong>STRONGER BOOKINGS</strong>
     </p>
-    <sub>Laurierstraat 82 | 5643 AZ | Eindhoven | The Netherlands</sub>
-    <sub>Phone +31 (0)68 1536 288 | VAT# NL150495791B01</sub>
+    <sub>Hugo van der Goeslaan 2 - 8600 | 5613 LG | Eindhoven | The Netherlands</sub>
+    <sub>Phone +31 (0)68 1536 288 | VAT# NL001764612B84</sub>
   </StyledMain>
 );
 
