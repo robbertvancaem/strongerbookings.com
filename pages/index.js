@@ -27,7 +27,7 @@ const Slide = styled.div`
   background: ${({ path }) => `url("${path}")`};
   background-size: cover;
   background-position: center center;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.55s ease;
   opacity: ${({ active }) => (active ? 1 : 0)};
 `;
 
