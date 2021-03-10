@@ -1,10 +1,9 @@
-import React from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
-import { Box, Flex } from '@rebass/grid';
+import React from "react";
+import styled from "styled-components";
+import { Box, Flex } from "@rebass/grid";
 
-import wpRestApiUrl from '../config/endpoints';
-import Main from '../components/main';
+import wpRestApiUrl from "../config/endpoints";
+import Main from "../components/main";
 
 const Image = styled.img`
   max-width: 100%;
@@ -16,29 +15,35 @@ const Tour = styled(Box)`
   background: ${({ theme }) => theme.colors.white};
 `;
 
-const Tours = ({ tours }) => console.log(tours) || (
-<Main>
-  <Flex width={1} justifyContent="center" flexWrap="wrap">
-    {tours.map((t) => {
-      const image = t._embedded['wp:featuredmedia'] && t._embedded['wp:featuredmedia'][0].source_url;
-      return (
-        <Tour width={[0.5, 0.5, 1 / 4]} m={2} p={[1, 1, 2]} key={t.id}>
-          <Image src={image} />
-          <h4 dangerouslySetInnerHTML={{ __html: t.title.rendered }} />
-        </Tour>
-      );
-    })}
-  </Flex>
-</Main>
+const Tours = ({ tours }) => (
+  <Main>
+    <Flex width={1} justifyContent="center" flexWrap="wrap">
+      {tours.map((t) => {
+        const image =
+          t._embedded["wp:featuredmedia"] &&
+          t._embedded["wp:featuredmedia"][0].source_url;
+        return (
+          <Tour width={[0.5, 0.5, 1 / 4]} m={2} p={[1, 1, 2]} key={t.id}>
+            <Image src={image} />
+            <h4 dangerouslySetInnerHTML={{ __html: t.title.rendered }} />
+          </Tour>
+        );
+      })}
+    </Flex>
+  </Main>
 );
 
-Tours.getInitialProps = async () => {
+export async function getStaticProps() {
   const path = `${wpRestApiUrl}posts?categories=2&orderby=modified&order=desc&_embed`;
 
-  const r = await axios.get(path);
-  const tours = await r.data;
+  const r = await fetch(path);
+  const tours = await r.json();
 
-  return { tours };
-};
+  return {
+    props: {
+      tours,
+    },
+  };
+}
 
 export default Tours;

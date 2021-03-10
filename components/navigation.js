@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import Link from 'next/link';
-import { Box, Flex } from '@rebass/grid';
+import React from "react";
+import styled from "styled-components";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Box, Flex } from "@rebass/grid";
 
-import media from '../utils/media-queries';
-import LogoSrc from '../static/images/logo.png';
-import Image from './image';
+import media from "../utils/media-queries";
+import Image from "./image";
 
 const Wrapper = styled.nav`
   height: 80px;
@@ -38,40 +38,61 @@ const MenuItems = styled(Flex)`
 
   a {
     margin-left: 4em;
-    transition: all 0.25s ease;
+    position: relative;
 
     ${media.phone`
       margin-left: 2em;
       font-size: 0.75em;
     `}
 
-    &:hover {
-      transform: translateX(3px);
+    &:after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: #fff;
+      transform: scaleX(0);
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      transition: all 0.25s ease;
+    }
+
+    &:hover:after,
+    &.active:after {
+      transform: scaleX(1);
     }
   }
 `;
 
-const Navigation = () => (
-  <Wrapper>
-    <Logo>
-      <Link href="/">
-        <a>
-          <Image path={LogoSrc} alt="logo" />
-        </a>
-      </Link>
-    </Logo>
-    <MenuItems>
-      <Link href="/roster">
-        <a>Roster</a>
-      </Link>
-      <Link href="tours">
-        <a>Tours</a>
-      </Link>
-      <Link href="contact">
-        <a>Contact</a>
-      </Link>
-    </MenuItems>
-  </Wrapper>
-);
+const Navigation = () => {
+  const { pathname } = useRouter();
+  return (
+    <Wrapper>
+      <Logo>
+        <Link href="/">
+          <a>
+            <Image path="/images/logo.png" alt="logo" />
+          </a>
+        </Link>
+      </Logo>
+      <MenuItems>
+        <Link href="/roster">
+          <a className={pathname === "/roster" ? "active" : undefined}>
+            Roster
+          </a>
+        </Link>
+        <Link href="tours">
+          <a className={pathname === "/tours" ? "active" : undefined}>Tours</a>
+        </Link>
+        <Link href="contact">
+          <a className={pathname === "/contact" ? "active" : undefined}>
+            Contact
+          </a>
+        </Link>
+      </MenuItems>
+    </Wrapper>
+  );
+};
 
 export default Navigation;
