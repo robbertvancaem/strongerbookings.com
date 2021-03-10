@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
-import wpRestApiUrl from '../config/endpoints';
-import Icon from '../components/icon';
+import wpRestApiUrl from "../config/endpoints";
+import Icon from "../components/icon";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -33,10 +32,11 @@ const Slide = styled.div`
 `;
 
 const Index = ({ slides }) => {
-  const [active, setActive] = useState(0);
+  const start = Math.floor(Math.random() * 3);
+  const [active, setActive] = useState(start);
   useEffect(() => {
     const interval = setInterval(() => {
-      setActive(a => (a + 1) % slides.length);
+      setActive((a) => (a + 1) % slides.length);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -66,14 +66,17 @@ const Index = ({ slides }) => {
   );
 };
 
-Index.getInitialProps = async () => {
+export async function getStaticProps() {
   const path = `${wpRestApiUrl}pages?slug=homepage`;
-  const r = await axios.get(path);
-  const data = await r.data[0];
+  const r = await fetch(path);
+  const data = await r.json();
+  const page = data[0];
 
   return {
-    slides: [data.acf.slide_1, data.acf.slide_2, data.acf.slide_3],
+    props: {
+      slides: [page.acf.slide_1, page.acf.slide_2, page.acf.slide_3],
+    },
   };
-};
+}
 
 export default Index;
