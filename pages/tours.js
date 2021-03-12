@@ -43,6 +43,7 @@ export async function getStaticProps() {
     props: {
       tours,
     },
+    revalidate: 1,
   };
 }
 

@@ -72,6 +72,7 @@ export async function getStaticProps() {
     props: {
       roster,
     },
+    revalidate: 1,
   };
 }
 

@@ -76,6 +76,7 @@ export async function getStaticProps() {
     props: {
       slides: [page.acf.slide_1, page.acf.slide_2, page.acf.slide_3],
     },
+    revalidate: 1,
   };
 }
 
