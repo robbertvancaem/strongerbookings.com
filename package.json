@@ -3,11 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "deploy": "vercel",
-    "deploy-prod": "vercel --prod"
+    "start": "next"
   },
   "repository": {
     "type": "git",

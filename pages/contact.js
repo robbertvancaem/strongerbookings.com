@@ -32,7 +32,7 @@ const Contact = () => (
       <strong>STRONGER BOOKINGS</strong>
     </p>
     <sub>
-      Hugo van der Goeslaan 2 - 8600 | 5613 LG | Eindhoven | The Netherlands
+      Samuel de Langestraat 40 | 5654 GG | Eindhoven | The Netherlands
     </sub>
     <sub>Phone +31 (0)68 1536 288 | VAT# NL001764612B84</sub>
   </StyledMain>
